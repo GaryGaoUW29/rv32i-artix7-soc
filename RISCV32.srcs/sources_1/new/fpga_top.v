@@ -22,6 +22,7 @@
 
 module fpga_top (
     input i_clk_25m,
+    input i_rst_n,
     output [3:0] debug_pc
 );
 
@@ -29,6 +30,7 @@ module fpga_top (
 
     core_top u_cpu (
         .clk    (i_clk_25m),
+        .rst_n  (i_rst_n),
         .pc_wire(internal_pc)
     );
 
