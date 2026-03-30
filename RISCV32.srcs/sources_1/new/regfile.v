@@ -35,8 +35,15 @@ module regfile (
 
     reg [31:0] regs[0:31];
 
-    assign rdata1 = (raddr1 == 5'b00000) ? 32'h00000000 : regs[raddr1];
-    assign rdata2 = (raddr2 == 5'b00000) ? 32'h00000000 : regs[raddr2];
+    // Internal Forwarding (Write-First): If reading the same register that is currently being written,
+    // bypass the register file array and forward the wdata directly.
+    assign rdata1 = (raddr1 == 5'b00000) ? 32'h00000000 : 
+                    ((we == 1'b1) && (waddr == raddr1)) ? wdata : 
+                    regs[raddr1];
+                    
+    assign rdata2 = (raddr2 == 5'b00000) ? 32'h00000000 : 
+                    ((we == 1'b1) && (waddr == raddr2)) ? wdata : 
+                    regs[raddr2];
 
     always @(posedge clk) begin
         if (!rst_n) begin

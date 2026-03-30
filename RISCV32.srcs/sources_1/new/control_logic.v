@@ -21,14 +21,14 @@
 
 module control_logic (
     input [31:0] inst,
-    input br_en,
     output reg reg_wen,
     output reg a_sel,
     output reg b_sel,
     output reg [3:0] alu_sel,
     output reg mem_rw,
     output reg [1:0] wb_sel,
-    output reg pc_sel
+    output reg is_jump,
+    output reg is_branch
 );
 
     wire [6:0] opcode = inst[6:0];
@@ -42,7 +42,8 @@ module control_logic (
         b_sel   = 1'b0;
         alu_sel = 4'b0000;
         wb_sel  = 2'b00;
-        pc_sel  = 1'b0;
+        is_branch = 1'b0;
+        is_jump = 1'b0;
 
         case (opcode)
             // R-Type
@@ -111,7 +112,7 @@ module control_logic (
                 alu_sel = 4'b0000;
                 mem_rw  = 1'b0;
                 wb_sel  = 2'b01;  // don't care
-                pc_sel  = br_en;
+                is_branch = 1'b1;
             end
 
             // U-Type-lui
@@ -140,7 +141,7 @@ module control_logic (
                 b_sel   = 1'b1;
                 alu_sel = 4'b0000;
                 wb_sel  = 2'b10;
-                pc_sel  = 1'b1;
+                is_jump = 1'b1;
             end
 
             // I-Type-jalr
@@ -151,7 +152,7 @@ module control_logic (
                 b_sel   = 1'b1;
                 alu_sel = 4'b0000;
                 wb_sel  = 2'b10;
-                pc_sel  = 1'b1;
+                is_jump = 1'b1;
             end
 
             default: begin
