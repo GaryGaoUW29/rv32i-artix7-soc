@@ -73,7 +73,7 @@ module tb_core ();
         rst_n = 1'b0;
         #20;
         rst_n = 1'b1;
-        #200;
+        #20000;
         $finish;
     end
 

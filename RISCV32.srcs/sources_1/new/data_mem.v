@@ -29,6 +29,13 @@ module data_mem (
 );
 
     reg [31:0] ram[0:1023];
+    
+    integer i;
+    initial begin
+        for (i = 0; i < 1024; i = i + 1) begin
+            ram[i] = 32'h00000000; 
+        end
+    end
 
     assign rdata = ram[addr[31:2]];
 

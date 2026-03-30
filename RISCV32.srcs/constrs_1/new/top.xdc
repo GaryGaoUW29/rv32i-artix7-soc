@@ -2,7 +2,7 @@ set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 1 [current_design]
 set_property CONFIG_MODE SPIx1 [current_design] 
 set_property BITSTREAM.CONFIG.CONFIGRATE 50 [current_design]
 set_property BITSTREAM.CONFIG.SPI_32BIT_ADDR NO [current_design]
-create_clock -period 15.000 -name sys_clk_pin -waveform {0.000 7.500} [get_ports i_clk_25m]
+create_clock -period 17.000 -name sys_clk_pin -waveform {0.000 8.500} [get_ports i_clk_25m]
 
 set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN K4} [get_ports {i_clk_25m}]
 set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN N14} [get_ports {o_led[0]}]

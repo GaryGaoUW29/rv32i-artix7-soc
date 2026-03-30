@@ -31,7 +31,7 @@ module fpga_top (
     core_top u_cpu (
         .clk    (i_clk_25m),
         .rst_n  (i_rst_n),
-        .pc_wire(internal_pc)
+        .alu_res(internal_pc)
     );
 
     // 把内部PC的4根线接到输出引脚（窗户）
