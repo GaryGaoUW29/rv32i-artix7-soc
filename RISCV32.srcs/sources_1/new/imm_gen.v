@@ -27,11 +27,11 @@ module imm_gen (
 );
 
     always @(*) begin
-        imm = 32'b0;
+        imm = 32'b0; //Dafault value to avoid latches
 
         case (imm_sel)
             //I type
-            7'b0010011: begin
+            7'b0010011, 7'b0000011, 7'b1100111: begin
                 imm = {{20{inst[31]}}, inst[31:20]};
             end
 
@@ -46,7 +46,7 @@ module imm_gen (
             end
 
             // U type
-            7'b0110111: begin
+            7'b0110111, 7'b0010111: begin
                 imm = {inst[31:12], 12'b0};
             end
 

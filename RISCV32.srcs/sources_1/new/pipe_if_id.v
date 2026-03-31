@@ -34,10 +34,10 @@ module pipe_if_id (
 
     always @(posedge clk, negedge rst_n) begin
         if (!rst_n) begin
-            id_inst_o <= 32'h00000033;
+            id_inst_o <= 32'h00000013;
             id_pc_o   <= 32'b00000000;
         end else if (flush) begin
-            id_inst_o <= 32'h00000033;
+            id_inst_o <= 32'h00000013;
             id_pc_o   <= 32'b00000000;
         end else if (!stall) begin
             id_pc_o   <= if_pc_i;

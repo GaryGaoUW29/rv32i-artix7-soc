@@ -24,22 +24,46 @@ module core_top (
     input clk,
     input rst_n,
 
-    // Outputs for simulation
+    // Basic outputs for simulation
     output [31:0] pc_wire,
     output [31:0] inst_wire,
-
-    // Dedoded instruction fields and control signals
-    output [ 6:0] opcode,
-    output [ 4:0] rd,
-    output [ 2:0] funct3,
-    output        reg_wen,
-    output [31:0] rdata1,
-    output [31:0] rdata2,
-    output [31:0] imm,
     output [31:0] alu_res,
-    output        mem_rw,
     output [31:0] mem_rdata,
-    output [31:0] wb_data
+    output [31:0] wb_data,
+
+    // Stage-level debug outputs for pipeline tracing
+    output        dbg_flush,
+    output        dbg_stall,
+    output        dbg_if_pc_sel,
+    output [31:0] dbg_if_jump_addr,
+
+    output [31:0] dbg_id_pc,
+    output [31:0] dbg_id_inst,
+    output [ 6:0] dbg_id_opcode,
+    output [ 4:0] dbg_id_rd,
+    output [ 2:0] dbg_id_funct3,
+    output        dbg_id_reg_wen,
+    output [31:0] dbg_id_rdata1,
+    output [31:0] dbg_id_rdata2,
+    output [31:0] dbg_id_imm,
+
+    output [31:0] dbg_ex_pc,
+    output [31:0] dbg_ex_alu_res,
+    output [ 4:0] dbg_ex_rd,
+    output        dbg_ex_reg_wen,
+    output [ 1:0] dbg_ex_wb_sel,
+
+    output [31:0] dbg_mem_pc,
+    output [31:0] dbg_mem_alu_res,
+    output [ 4:0] dbg_mem_rd,
+    output        dbg_mem_reg_wen,
+    output [ 1:0] dbg_mem_wb_sel,
+    output        dbg_mem_rw,
+
+    output [31:0] dbg_wb_pc,
+    output [ 4:0] dbg_wb_rd,
+    output        dbg_wb_reg_wen,
+    output [ 1:0] dbg_wb_wb_sel
 );
 
     wire flush = 1'b0;  // Placeholder, should be driven by control logic for branch/jump
@@ -297,15 +321,39 @@ module core_top (
     assign pc_wire   = if_pc;
     assign inst_wire = if_inst;
 
-    assign opcode    = id_opcode;
-    assign rd        = id_rd;
-    assign funct3    = id_funct3;
-    assign reg_wen   = id_reg_wen;
-    assign rdata1    = id_rdata1;
-    assign rdata2    = id_rdata2;
-    assign imm       = id_imm;
-
     assign alu_res   = ex_alu_res;
-    assign mem_rw    = mem_mem_rw;
+
+    assign dbg_flush       = flush;
+    assign dbg_stall       = stall;
+    assign dbg_if_pc_sel   = if_pc_sel;
+    assign dbg_if_jump_addr = if_jump_addr;
+
+    assign dbg_id_pc       = id_pc;
+    assign dbg_id_inst     = id_inst;
+    assign dbg_id_opcode   = id_opcode;
+    assign dbg_id_rd       = id_rd;
+    assign dbg_id_funct3   = id_funct3;
+    assign dbg_id_reg_wen  = id_reg_wen;
+    assign dbg_id_rdata1   = id_rdata1;
+    assign dbg_id_rdata2   = id_rdata2;
+    assign dbg_id_imm      = id_imm;
+
+    assign dbg_ex_pc       = ex_pc;
+    assign dbg_ex_alu_res  = ex_alu_res;
+    assign dbg_ex_rd       = ex_rd;
+    assign dbg_ex_reg_wen  = ex_reg_wen;
+    assign dbg_ex_wb_sel   = ex_wb_sel;
+
+    assign dbg_mem_pc      = mem_pc;
+    assign dbg_mem_alu_res = mem_alu_res;
+    assign dbg_mem_rd      = mem_rd;
+    assign dbg_mem_reg_wen = mem_reg_wen;
+    assign dbg_mem_wb_sel  = mem_wb_sel;
+    assign dbg_mem_rw      = mem_mem_rw;
+
+    assign dbg_wb_pc       = wb_pc;
+    assign dbg_wb_rd       = wb_rd;
+    assign dbg_wb_reg_wen  = wb_reg_wen;
+    assign dbg_wb_wb_sel   = wb_wb_sel;
 
 endmodule

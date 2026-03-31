@@ -68,6 +68,6 @@ module ex_stage (
     // The if_pc_sel_flush will also be used as flush signal for IF/ID pipeline register, 
     // to flush the wrong path instruction when branch taken or jump
     assign if_pc_sel_o = (ex_is_jump_i || (ex_is_branch_i && ex_br_en)) ? 1'b1 : 1'b0;
-    assign if_jump_addr_o = ex_alu_res_o;
+    assign if_jump_addr_o = {ex_alu_res_o[31:1], 1'b0}; // Last bit is always 0 since instructions are 2 or 4 byte aligned
 
 endmodule

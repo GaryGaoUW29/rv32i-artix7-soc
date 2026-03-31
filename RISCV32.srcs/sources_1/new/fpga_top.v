@@ -26,15 +26,15 @@ module fpga_top (
     output [3:0] debug_pc
 );
 
-    wire [31:0] internal_pc;
+    wire [31:0] alu_res;
 
     core_top u_cpu (
         .clk    (i_clk_25m),
         .rst_n  (i_rst_n),
-        .pc_wire(internal_pc)
+        .alu_res(alu_res)
     );
 
     // 把内部PC的4根线接到输出引脚（窗户）
-    assign debug_pc = internal_pc[5:2];
+    assign debug_pc = {alu_res[31], alu_res[21], alu_res[11], alu_res[1]};
 
 endmodule
