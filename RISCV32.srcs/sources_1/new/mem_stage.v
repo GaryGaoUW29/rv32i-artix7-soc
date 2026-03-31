@@ -24,11 +24,9 @@ module mem_stage (
     input clk,
     input rst_n,
 
-    input [31:0] mem_pc_i,
     input [31:0] mem_wdata_i,
     input mem_mem_rw_i,
     input mem_reg_wen_i,
-    input [4:0] mem_rd_i,
     input [1:0] mem_wb_sel_i,
     input [31:0] mem_alu_res_i,
     input [2:0] mem_funct3_i,

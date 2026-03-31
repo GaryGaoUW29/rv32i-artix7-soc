@@ -30,10 +30,6 @@ module ex_stage (
     input       ex_a_sel_i,      // used for ALU op1 selection
     input       ex_b_sel_i,      // used for ALU op2 selection
     input [3:0] ex_alu_sel_i,    // used for ALU operation selection
-    input       ex_mem_rw_i,     // pass to M
-    input       ex_reg_wen_i,    // pass to ID 
-    input [4:0] ex_rd_i,         // pass to ID
-    input [1:0] ex_wb_sel_i,     // pass to M and WB
     input       ex_is_jump_i,    // used to determine pc_sel in IF stage
     input       ex_is_branch_i,  // used to determine pc_sel in IF stage
     input [2:0] ex_funct3_i,     // pass to M and used for branch comp

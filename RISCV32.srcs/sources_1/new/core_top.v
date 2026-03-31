@@ -32,8 +32,9 @@ module core_top (
     output [31:0] wb_data,
 
     // Stage-level debug outputs for pipeline tracing
-    output        dbg_flush,
-    output        dbg_stall,
+    output dbg_flush,
+    output dbg_stall,
+
     output        dbg_if_pc_sel,
     output [31:0] dbg_if_jump_addr,
 
@@ -66,8 +67,8 @@ module core_top (
     output [ 1:0] dbg_wb_wb_sel
 );
 
-    wire flush = 1'b0;  // Placeholder, should be driven by control logic for branch/jump
-    wire stall = 1'b0;  // Placeholder, should be driven by hazard detection
+    wire        flush = 1'b0;  // Placeholder, should be driven by control logic for branch/jump
+    wire        stall = 1'b0;  // Placeholder, should be driven by hazard detection
 
     wire        if_pc_sel;
     wire [31:0] if_jump_addr;
@@ -135,7 +136,6 @@ module core_top (
         .clk      (clk),
         .rst_n    (rst_n),
         .id_inst_i(id_inst),
-        .id_pc_i  (id_pc),
 
         // From WriteBack Stage: 
         .wb_wen_i  (wb_reg_wen),
@@ -227,10 +227,6 @@ module core_top (
         .ex_a_sel_i    (ex_a_sel),      // used for ALU op1 selection
         .ex_b_sel_i    (ex_b_sel),      // used for ALU op2 selection
         .ex_alu_sel_i  (ex_alu_sel),    // used for ALU operation selection
-        .ex_mem_rw_i   (ex_mem_rw),     // pass to M
-        .ex_reg_wen_i  (ex_reg_wen),    // pass to ID 
-        .ex_rd_i       (ex_rd),         // pass to ID
-        .ex_wb_sel_i   (ex_wb_sel),     // pass to M and WB
         .ex_is_jump_i  (ex_is_jump),    // used to determine pc_sel in IF stage
         .ex_is_branch_i(ex_is_branch),  // used to determine pc_sel in IF stage
         .ex_funct3_i   (ex_funct3),     // pass to M and used for branch comp
@@ -278,16 +274,14 @@ module core_top (
         .clk  (clk),
         .rst_n(rst_n),
 
-        .mem_pc_i     (mem_pc),
         .mem_wdata_i  (mem_wdata),
         .mem_mem_rw_i (mem_mem_rw),
         .mem_reg_wen_i(mem_reg_wen),
-        .mem_rd_i     (mem_rd),
         .mem_wb_sel_i (mem_wb_sel),
         .mem_alu_res_i(mem_alu_res),
         .mem_funct3_i (mem_funct3),
 
-        .mem_rdata_o  (mem_rdata)
+        .mem_rdata_o(mem_rdata)
     );
 
     pipe_mem_wb u_pipe_mem_wb (
@@ -318,42 +312,42 @@ module core_top (
                      (wb_wb_sel == 2'b10) ? (wb_pc + 4) : wb_alu_res;
 
 
-    assign pc_wire   = if_pc;
+    assign pc_wire = if_pc;
     assign inst_wire = if_inst;
 
-    assign alu_res   = ex_alu_res;
+    assign alu_res = ex_alu_res;
 
-    assign dbg_flush       = flush;
-    assign dbg_stall       = stall;
-    assign dbg_if_pc_sel   = if_pc_sel;
+    assign dbg_flush = flush;
+    assign dbg_stall = stall;
+    assign dbg_if_pc_sel = if_pc_sel;
     assign dbg_if_jump_addr = if_jump_addr;
 
-    assign dbg_id_pc       = id_pc;
-    assign dbg_id_inst     = id_inst;
-    assign dbg_id_opcode   = id_opcode;
-    assign dbg_id_rd       = id_rd;
-    assign dbg_id_funct3   = id_funct3;
-    assign dbg_id_reg_wen  = id_reg_wen;
-    assign dbg_id_rdata1   = id_rdata1;
-    assign dbg_id_rdata2   = id_rdata2;
-    assign dbg_id_imm      = id_imm;
+    assign dbg_id_pc = id_pc;
+    assign dbg_id_inst = id_inst;
+    assign dbg_id_opcode = id_opcode;
+    assign dbg_id_rd = id_rd;
+    assign dbg_id_funct3 = id_funct3;
+    assign dbg_id_reg_wen = id_reg_wen;
+    assign dbg_id_rdata1 = id_rdata1;
+    assign dbg_id_rdata2 = id_rdata2;
+    assign dbg_id_imm = id_imm;
 
-    assign dbg_ex_pc       = ex_pc;
-    assign dbg_ex_alu_res  = ex_alu_res;
-    assign dbg_ex_rd       = ex_rd;
-    assign dbg_ex_reg_wen  = ex_reg_wen;
-    assign dbg_ex_wb_sel   = ex_wb_sel;
+    assign dbg_ex_pc = ex_pc;
+    assign dbg_ex_alu_res = ex_alu_res;
+    assign dbg_ex_rd = ex_rd;
+    assign dbg_ex_reg_wen = ex_reg_wen;
+    assign dbg_ex_wb_sel = ex_wb_sel;
 
-    assign dbg_mem_pc      = mem_pc;
+    assign dbg_mem_pc = mem_pc;
     assign dbg_mem_alu_res = mem_alu_res;
-    assign dbg_mem_rd      = mem_rd;
+    assign dbg_mem_rd = mem_rd;
     assign dbg_mem_reg_wen = mem_reg_wen;
-    assign dbg_mem_wb_sel  = mem_wb_sel;
-    assign dbg_mem_rw      = mem_mem_rw;
+    assign dbg_mem_wb_sel = mem_wb_sel;
+    assign dbg_mem_rw = mem_mem_rw;
 
-    assign dbg_wb_pc       = wb_pc;
-    assign dbg_wb_rd       = wb_rd;
-    assign dbg_wb_reg_wen  = wb_reg_wen;
-    assign dbg_wb_wb_sel   = wb_wb_sel;
+    assign dbg_wb_pc = wb_pc;
+    assign dbg_wb_rd = wb_rd;
+    assign dbg_wb_reg_wen = wb_reg_wen;
+    assign dbg_wb_wb_sel = wb_wb_sel;
 
 endmodule

@@ -26,7 +26,6 @@ module id_stage (
     input clk,
     input rst_n,
     input [31:0] id_inst_i,
-    input [31:0] id_pc_i,
 
     // From WriteBack Stage: 
     input wb_wen_i,
