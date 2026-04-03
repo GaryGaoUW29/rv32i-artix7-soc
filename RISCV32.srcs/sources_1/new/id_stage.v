@@ -50,21 +50,25 @@ module id_stage (
     // For Branch and Jump in AlU/ EX Stage
     output id_is_jump_o,
     output id_is_branch_o,
-    output [2:0] id_funct3_o
+    output [2:0] id_funct3_o,
+
+    // forwarding signals
+    output [4:0] id_raddr1_o,
+    output [4:0] id_raddr2_o
 
 );
 
     assign id_opcode_o = id_inst_i[6:0];
     assign id_funct3_o = id_inst_i[14:12];
     assign id_rd_o = id_inst_i[11:7];
-    wire [4:0] id_raddr1 = id_inst_i[19:15];
-    wire [4:0] id_raddr2 = id_inst_i[24:20];
+    assign id_raddr1_o = id_inst_i[19:15];
+    assign id_raddr2_o = id_inst_i[24:20];
 
     regfile u_regfile (
         .clk   (clk),
         .rst_n (rst_n),
-        .raddr1(id_raddr1),
-        .raddr2(id_raddr2),
+        .raddr1(id_raddr1_o),
+        .raddr2(id_raddr2_o),
         .rdata1(id_rdata1_o),
         .rdata2(id_rdata2_o),
 

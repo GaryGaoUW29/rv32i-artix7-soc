@@ -102,12 +102,12 @@ set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN K19} [get_ports {debug_pc[0
 # set_property -dict {PACKAGE_PIN AA1 IOSTANDARD TMDS_33} [get_ports {o_hdmi_d_p[0]}]
 # set_property -dict {PACKAGE_PIN W1 IOSTANDARD TMDS_33} [get_ports o_hdmi_clk_p]
 
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_cke}] #恒3V3
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_cs_n}] #恒GND
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[0]}] #恒GND
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[1]}] #恒GND
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[2]}] #恒GND
-# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[3]}] #恒GND
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_cke}] # tie to constant 3.3V
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_cs_n}] # tie to constant GND
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[0]}] # tie to constant GND
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[1]}] # tie to constant GND
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[2]}] # tie to constant GND
+# # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN   } [get_ports {o_sdram_dqm[3]}] # tie to constant GND
 # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN  E14 } [get_ports {o_sdram_clk}]
 # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN  D17 } [get_ports {o_sdram_we_n}]
 # set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN  D14 } [get_ports {o_sdram_cas_n}]

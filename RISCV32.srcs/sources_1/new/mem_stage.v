@@ -31,7 +31,11 @@ module mem_stage (
     input [31:0] mem_alu_res_i,
     input [2:0] mem_funct3_i,
 
-    output [31:0] mem_rdata_o
+    output [31:0] mem_rdata_o,
+
+    // forwading signals
+    input [31:0] wb_data_i,
+    input mem_forward_wdata_sel_i
 );
 
     wire [3:0] mem_write_ctrl;  // 4-bit control signal for byte/half/word write enables
@@ -47,11 +51,14 @@ module mem_stage (
     // Determine if the current instruction is a load that needs special handling for byte/half-word loads
     wire mem_is_load = (mem_reg_wen_i == 1'b1) && (mem_mem_rw_i == 1'b0) && (mem_wb_sel_i == 2'b00);
 
+    // forwarding logic for store after load hazard
+    wire [31:0] mem_wdata_final = (mem_forward_wdata_sel_i) ? wb_data_i : mem_wdata_i;
+
     data_mem u_data_mem (
         .clk  (clk),
         .we   (mem_write_ctrl),
         .addr (mem_alu_res_i),
-        .wdata(mem_wdata_i),
+        .wdata(mem_wdata_final),
         .rdata(mem_rdata_unfiltered)
     );
 

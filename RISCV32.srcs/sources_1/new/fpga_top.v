@@ -34,7 +34,7 @@ module fpga_top (
         .alu_res(alu_res)
     );
 
-    // 把内部PC的4根线接到输出引脚（窗户）
+    // Route four internal PC bits to output pins for quick debug visibility.
     assign debug_pc = {alu_res[31], alu_res[21], alu_res[11], alu_res[1]};
 
 endmodule

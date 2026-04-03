@@ -37,12 +37,16 @@ module pipe_ex_mem (
 
     output reg [31:0] mem_pc_o,
     output reg [31:0] mem_wdata_o,
-    output reg  mem_mem_rw_o,
-    output reg  mem_reg_wen_o,
+    output reg mem_mem_rw_o,
+    output reg mem_reg_wen_o,
     output reg [4:0] mem_rd_o,
     output reg [1:0] mem_wb_sel_o,
     output reg [31:0] mem_alu_res_o,
-    output reg [2:0] mem_funct3_o
+    output reg [2:0] mem_funct3_o,
+
+    // frwarding signals
+    input [4:0] ex_raddr2_i,
+    output reg [4:0] mem_raddr2_o
 );
 
     always @(posedge clk, negedge rst_n) begin
@@ -55,6 +59,7 @@ module pipe_ex_mem (
             mem_wb_sel_o <= 2'b00;
             mem_alu_res_o <= 32'b0;
             mem_funct3_o <= 3'b000;
+            mem_raddr2_o <= 5'b00000;
         end else if (flush) begin
             mem_pc_o <= 32'b0;
             mem_wdata_o <= 32'b0;
@@ -64,6 +69,7 @@ module pipe_ex_mem (
             mem_wb_sel_o <= 2'b00;
             mem_alu_res_o <= 32'b0;
             mem_funct3_o <= 3'b000;
+            mem_raddr2_o <= 5'b00000;
         end else if (!stall) begin
             mem_pc_o <= ex_pc_i;
             mem_wdata_o <= ex_wdata_i;
@@ -73,6 +79,7 @@ module pipe_ex_mem (
             mem_wb_sel_o <= ex_wb_sel_i;
             mem_alu_res_o <= ex_alu_res_i;
             mem_funct3_o <= ex_funct3_i;
+            mem_raddr2_o <= ex_raddr2_i;
         end
     end
 endmodule

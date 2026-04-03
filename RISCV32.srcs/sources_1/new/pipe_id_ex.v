@@ -59,7 +59,13 @@ module pipe_id_ex (
     output reg [1:0] ex_wb_sel_o,
     output reg       ex_is_jump_o,
     output reg       ex_is_branch_o,
-    output reg [2:0] ex_funct3_o
+    output reg [2:0] ex_funct3_o,
+
+    // forwarding signals
+    input [4:0] id_raddr1_i,
+    input [4:0] id_raddr2_i,
+    output reg [4:0] ex_raddr1_o,
+    output reg [4:0] ex_raddr2_o
 );
 
     always @(posedge clk, negedge rst_n) begin
@@ -78,6 +84,8 @@ module pipe_id_ex (
             ex_is_jump_o <= 1'b0;
             ex_is_branch_o <= 1'b0;
             ex_funct3_o <= 3'b000;
+            ex_raddr1_o <= 5'b00000;
+            ex_raddr2_o <= 5'b00000;
         end else if (flush) begin
             ex_pc_o <= 32'b0;
             ex_rdata1_o <= 32'b0;
@@ -93,6 +101,8 @@ module pipe_id_ex (
             ex_is_jump_o <= 1'b0;
             ex_is_branch_o <= 1'b0;
             ex_funct3_o <= 3'b000;
+            ex_raddr1_o <= 5'b00000;
+            ex_raddr2_o <= 5'b00000;
         end else if (!stall) begin
             ex_pc_o <= id_pc_i;
             ex_rdata1_o <= id_rdata1_i;
@@ -108,6 +118,8 @@ module pipe_id_ex (
             ex_is_jump_o <= id_is_jump_i;
             ex_is_branch_o <= id_is_branch_i;
             ex_funct3_o <= id_funct3_i;
+            ex_raddr1_o <= id_raddr1_i;
+            ex_raddr2_o <= id_raddr2_i;
         end
     end
 
