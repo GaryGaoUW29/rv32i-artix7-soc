@@ -31,6 +31,7 @@ module hazard_detection_unit (
     output stall_o
 );
 
+    // Load-use hazard detection logic
     assign stall_o = (ex_reg_wen_i == 1'b1) && 
                     ((ex_wb_sel_i == 2'b00) && (ex_rd_i != 5'b0) && 
                     ((ex_rd_i == id_raddr1_i) || ((ex_rd_i == id_raddr2_i)) && ~id_mem_rw_i));

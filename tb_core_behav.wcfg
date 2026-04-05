@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_core_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_core" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="257.189 ns"></ZoomStartTime>
+      <ZoomEndTime time="480.549 ns"></ZoomEndTime>
+      <Cursor1Time time="317.837 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="424"></NameColumnWidth>
+      <ValueColumnWidth column_width="132"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject fp_name="/tb_core/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/rst_n" type="logic">
+      <obj_property name="ElementShortName">rst_n</obj_property>
+      <obj_property name="ObjectShortName">rst_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_pc" type="array">
+      <obj_property name="ElementShortName">top_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">top_pc[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_inst" type="array">
+      <obj_property name="ElementShortName">top_inst[31:0]</obj_property>
+      <obj_property name="ObjectShortName">top_inst[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_alu_res" type="array">
+      <obj_property name="ElementShortName">top_alu_res[31:0]</obj_property>
+      <obj_property name="ObjectShortName">top_alu_res[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_mem_rdata" type="array">
+      <obj_property name="ElementShortName">top_mem_rdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">top_mem_rdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_wb_data" type="array">
+      <obj_property name="ElementShortName">top_wb_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">top_wb_data[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_dbg_flush" type="logic">
+      <obj_property name="ElementShortName">top_dbg_flush</obj_property>
+      <obj_property name="ObjectShortName">top_dbg_flush</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_core/top_dbg_stall" type="logic">
+      <obj_property name="ElementShortName">top_dbg_stall</obj_property>
+      <obj_property name="ObjectShortName">top_dbg_stall</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="group36" type="group">
+      <obj_property name="label">top_dbg_if</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_core/top_dbg_if_pc_sel" type="logic">
+         <obj_property name="ElementShortName">top_dbg_if_pc_sel</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_if_pc_sel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_if_jump_addr" type="array">
+         <obj_property name="ElementShortName">top_dbg_if_jump_addr[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_if_jump_addr[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group37" type="group">
+      <obj_property name="label">top_dbg_id</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_core/top_dbg_id_pc" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_pc[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_pc[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_inst" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_inst[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_inst[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_opcode" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_opcode[6:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_opcode[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_rd" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_rd[4:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_rd[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_funct3" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_funct3[2:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_funct3[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_reg_wen" type="logic">
+         <obj_property name="ElementShortName">top_dbg_id_reg_wen</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_reg_wen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_rdata1" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_rdata1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_rdata1[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_rdata2" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_rdata2[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_rdata2[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_id_imm" type="array">
+         <obj_property name="ElementShortName">top_dbg_id_imm[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_id_imm[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group38" type="group">
+      <obj_property name="label">top_dbg_ex</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_core/top_dbg_ex_pc" type="array">
+         <obj_property name="ElementShortName">top_dbg_ex_pc[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_ex_pc[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_ex_alu_res" type="array">
+         <obj_property name="ElementShortName">top_dbg_ex_alu_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_ex_alu_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_ex_rd" type="array">
+         <obj_property name="ElementShortName">top_dbg_ex_rd[4:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_ex_rd[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_ex_reg_wen" type="logic">
+         <obj_property name="ElementShortName">top_dbg_ex_reg_wen</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_ex_reg_wen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_ex_wb_sel" type="array">
+         <obj_property name="ElementShortName">top_dbg_ex_wb_sel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_ex_wb_sel[1:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group39" type="group">
+      <obj_property name="label">top_dbg_mem</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_core/top_dbg_mem_pc" type="array">
+         <obj_property name="ElementShortName">top_dbg_mem_pc[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_pc[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_mem_alu_res" type="array">
+         <obj_property name="ElementShortName">top_dbg_mem_alu_res[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_alu_res[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_mem_rd" type="array">
+         <obj_property name="ElementShortName">top_dbg_mem_rd[4:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_rd[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_mem_reg_wen" type="logic">
+         <obj_property name="ElementShortName">top_dbg_mem_reg_wen</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_reg_wen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_mem_wb_sel" type="array">
+         <obj_property name="ElementShortName">top_dbg_mem_wb_sel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_wb_sel[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_mem_rw" type="logic">
+         <obj_property name="ElementShortName">top_dbg_mem_rw</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_mem_rw</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group40" type="group">
+      <obj_property name="label">top_dbg_wb</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_core/top_dbg_wb_pc" type="array">
+         <obj_property name="ElementShortName">top_dbg_wb_pc[31:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_wb_pc[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_wb_rd" type="array">
+         <obj_property name="ElementShortName">top_dbg_wb_rd[4:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_wb_rd[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_wb_reg_wen" type="logic">
+         <obj_property name="ElementShortName">top_dbg_wb_reg_wen</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_wb_reg_wen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_core/top_dbg_wb_wb_sel" type="array">
+         <obj_property name="ElementShortName">top_dbg_wb_wb_sel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">top_dbg_wb_wb_sel[1:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

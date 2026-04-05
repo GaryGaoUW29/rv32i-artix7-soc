@@ -32,7 +32,7 @@ module mem_load_control (
     wire [ 1:0] offset = alu_res[1:0];
 
     always @(*) begin
-        shifted_data = 32'b0;
+        shifted_data   = 32'b0;
         rdata_filtered = 32'b0;
 
         if (is_load) begin

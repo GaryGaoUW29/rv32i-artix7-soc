@@ -57,7 +57,7 @@ module id_stage (
     output [4:0] id_raddr2_o
 
 );
-
+    // Decoding logic by bits on the ece222 slides
     assign id_opcode_o = id_inst_i[6:0];
     assign id_funct3_o = id_inst_i[14:12];
     assign id_rd_o = id_inst_i[11:7];

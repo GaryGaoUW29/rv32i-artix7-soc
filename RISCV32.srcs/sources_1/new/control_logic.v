@@ -37,11 +37,11 @@ module control_logic (
 
     always @(*) begin
         reg_wen = 1'b0;
-        mem_rw  = 1'b0;
-        a_sel   = 1'b0;
-        b_sel   = 1'b0;
+        mem_rw = 1'b0;
+        a_sel = 1'b0;
+        b_sel = 1'b0;
         alu_sel = 4'b0000;
-        wb_sel  = 2'b00;
+        wb_sel = 2'b00;
         is_branch = 1'b0;
         is_jump = 1'b0;
 
@@ -107,11 +107,11 @@ module control_logic (
             // B-Type
             7'b1100011: begin
                 reg_wen = 1'b0;
-                a_sel   = 1'b1;
-                b_sel   = 1'b1;
+                a_sel = 1'b1;
+                b_sel = 1'b1;
                 alu_sel = 4'b0000;
-                mem_rw  = 1'b0;
-                wb_sel  = 2'b01;  // don't care
+                mem_rw = 1'b0;
+                wb_sel = 2'b01;  // don't care
                 is_branch = 1'b1;
             end
 

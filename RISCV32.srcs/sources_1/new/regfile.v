@@ -33,10 +33,14 @@ module regfile (
     input [31:0] wdata
 );
 
+    // Use the distributed RAM style of register file implementation
+    // which is more efficient for small register files like 32 registers.
+    // Can be read and written in the same cycle
     reg [31:0] regs[0:31];
 
-    // Internal Forwarding (Write-First): If reading the same register that is currently being written,
-    // bypass the register file array and forward the wdata directly.
+    // Internal Forwarding (Write-First): 
+    // If reading the same register that is currently being written, 
+    // bypass the operation to the register file array and directly forward the wdata to read.
     assign rdata1 = (raddr1 == 5'b00000) ? 32'h00000000 : 
                     ((we == 1'b1) && (waddr == raddr1)) ? wdata : 
                     regs[raddr1];
@@ -46,9 +50,9 @@ module regfile (
                     regs[raddr2];
 
     integer i;
-
     always @(posedge clk) begin
         if (!rst_n) begin
+            // On reset, initialize all registers to 0. Good to have a known state for simulation and debugging.
             for (i = 0; i < 32; i = i + 1) begin
                 regs[i] <= 32'b0;
             end

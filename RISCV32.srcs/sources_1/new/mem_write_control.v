@@ -30,9 +30,11 @@ module mem_write_control (
     always @(*) begin
         if (is_store) begin
             case (funct3)
-                3'b000:  write_ctrl = 4'b0001 << alu_res[1:0];
-                3'b001:  write_ctrl = 4'b0011 << alu_res[1:0];
-                3'b010:  write_ctrl = 4'b1111;
+                3'b000:
+                write_ctrl = 4'b0001 << alu_res[1:0]; // only need the last 2 bits for offset within the word
+                3'b001:
+                write_ctrl = 4'b0011 << alu_res[1:0]; // only need the last 2 bits for offset within the word
+                3'b010: write_ctrl = 4'b1111;
                 default: write_ctrl = 4'b0000;
             endcase
         end else write_ctrl = 4'b0000;

@@ -27,7 +27,7 @@ module imm_gen (
 );
 
     always @(*) begin
-        imm = 32'b0; //Dafault value to avoid latches
+        imm = 32'b0;  //Dafault value to avoid latches
 
         case (imm_sel)
             //I type

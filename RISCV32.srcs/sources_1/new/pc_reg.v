@@ -30,8 +30,12 @@ module pc_reg (
 
     always @(posedge clk) begin
         if (!rst_n) begin
+            // Reset the pc to 0, aka standard RISCV starting address
+            // Also help the simulation to start with a known value instead of x's
             pc_out <= 32'h00000000;
         end else if (!stall) begin
+            // When staling, freeze the PC address
+            // In another word, only update the PC when we are not stalling
             pc_out <= pc_in;
         end
     end

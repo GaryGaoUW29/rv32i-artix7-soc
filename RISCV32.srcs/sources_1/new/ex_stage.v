@@ -36,7 +36,7 @@ module ex_stage (
 
     // Outputs to MEM stage (New signals)
     output [31:0] ex_alu_res_o,
-    output [31:0] ex_wdata_o,  // New signal for data to be written to memory
+    output [31:0] ex_wdata_o,    // New signal for data to be written to memory
 
     // For Branch and Jump in IF stage
     output if_pc_sel_o,

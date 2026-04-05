@@ -30,6 +30,7 @@ module if_stage (
     output [31:0] if_pc_o,
     output [31:0] if_inst_o
 );
+    // Calculate the next PC value based on whether we are taking a jump/branch or just incrementing by 4.
     wire [31:0] if_next_pc = (if_pc_sel_i) ? if_jump_addr_i : (if_pc_o + 4);
 
     pc_reg u_pc_reg (
