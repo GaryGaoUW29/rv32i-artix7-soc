@@ -377,6 +377,7 @@ module core_top (
         .ex_rd_i     (ex_rd),
         .id_raddr1_i (id_raddr1),
         .id_raddr2_i (id_raddr2),
+        .id_mem_rw_i (id_mem_rw),
 
         .stall_o(stall)
     );
