@@ -34,9 +34,16 @@ module hazard_detection_unit (
     // Load-use hazard detection logic
     assign stall_o = (ex_reg_wen_i == 1'b1) && 
                     ((ex_wb_sel_i == 2'b00) && (ex_rd_i != 5'b0) && 
-                    ((ex_rd_i == id_raddr1_i) || ((ex_rd_i == id_raddr2_i)) && ~id_mem_rw_i));
+                    ((ex_rd_i == id_raddr1_i) || (ex_rd_i == id_raddr2_i)));
 
+    // Note 1:
     // (ex_rd_i == id_raddr2_i)) && ~id_mem_rw_i) is for store after load hazard, 
     // we only need to stall when the instruction in EX stage is a load instruction 
     // and the destination register is the same as the source register of the store instruction in ID stage
+
+    // Note 2:
+    // Since we changed the distribution DREM to BRAM, the store afte load hazard needs to stall for 1 cycle
+    // because the lw need a postive edge to get the data from BRAM, 
+    // need to wait a cycle, then the sw can get the correct data to write into memory
+    // Change back to (ex_rd_i == id_raddr1_i) || (ex_rd_i == id_raddr2_i))
 endmodule

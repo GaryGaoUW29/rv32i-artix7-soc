@@ -42,6 +42,7 @@ module if_stage (
     );
 
     inst_mem u_inst_mem (
+        .clk    (clk),
         .pc_addr(if_pc_o),
         .inst   (if_inst_o)
     );

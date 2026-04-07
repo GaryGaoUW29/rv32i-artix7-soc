@@ -21,12 +21,14 @@
 
 
 module inst_mem (
-    input  [31:0] pc_addr,
-    output [31:0] inst
+    input clk,
+    input [31:0] pc_addr,
+    output reg [31:0] inst
 );
+    // Use ram_syle = "block" to infer block RAM on FPGA
+    (* ram_style = "block" *) reg [31:0] rom[0:1023];
 
-    reg [31:0] rom[0:1023];
-
+    // Initialize the instruction memory with a simple hazard test program
     integer i;
     initial begin
         for (i = 0; i < 1024; i = i + 1) begin
@@ -73,9 +75,13 @@ module inst_mem (
         rom[34] = 32'h00100993;  // addi x19, x0, 1    (Executed @ PC=132)
     end
 
-    // Chop the lowest 2 bits to get the word-aligned address index
-    // Same as the data memory, because instructions are also word-aligned 
-    // and we want to index by instruction number (like: 1,2,3...), not byte address.
-    assign inst = rom[pc_addr[31:2]];
+
+    // Using a synchonous B-RAM, the synthesis tool will infer it as a block RAM on FPGA, which has a latency of 1 cycle.
+    always @(posedge clk) begin
+        // Chop the lowest 2 bits to get the word-aligned address index
+        // Same as the data memory, because instructions are also word-aligned 
+        // and we want to index by instruction number (like: 1,2,3...), not byte address.
+        inst <= rom[pc_addr[31:2]];
+    end
 endmodule
 
