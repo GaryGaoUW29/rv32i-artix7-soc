@@ -125,4 +125,10 @@ module tb_core ();
         $finish;
     end
 
+    // Dump the waveform to a VCD file for viewing in a waveform viewer (Only when run sim in the vscode)
+    initial begin
+        $dumpfile("wave.vcd");
+        $dumpvars(0, tb_core);
+    end
+
 endmodule
