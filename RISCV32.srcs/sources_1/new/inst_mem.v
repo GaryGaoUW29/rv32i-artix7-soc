@@ -22,6 +22,8 @@
 
 module inst_mem (
     input clk,
+    input rst_n,
+    input stall,
     input [31:0] pc_addr,
     output reg [31:0] inst
 );
@@ -71,17 +73,30 @@ module inst_mem (
         rom[30] = 32'h00088967;  // jalr x18, 0(x17)   (JALR!)
         rom[31] = 32'h00000013;  // nop                (Flushed)
         rom[32] = 32'h00000013;  // nop                (Flushed)
-        rom[33] = 32'h00000013;  // nop                (Flushed)
-        rom[34] = 32'h00100993;  // addi x19, x0, 1    (Executed @ PC=132)
+        rom[33] = 32'h00000013;  // nop                (Jump target @ PC=132, executed)
+        rom[34] = 32'h00100993;  // addi x19, x0, 1    (Executed @ PC=136)
     end
 
 
     // Using a synchonous B-RAM, the synthesis tool will infer it as a block RAM on FPGA, which has a latency of 1 cycle.
+    // This output register effectively IS the IF/ID instruction register.
     always @(posedge clk) begin
-        // Chop the lowest 2 bits to get the word-aligned address index
-        // Same as the data memory, because instructions are also word-aligned 
-        // and we want to index by instruction number (like: 1,2,3...), not byte address.
-        inst <= rom[pc_addr[31:2]];
+        if (!rst_n) begin
+            // Reset to NOP so no X/garbage instruction leaks into ID when reset is released
+            inst <= 32'h00000013;
+        end else if (!stall) begin
+            // Chop the lowest 2 bits to get the word-aligned address index
+            // Same as the data memory, because instructions are also word-aligned 
+            // and we want to index by instruction number (like: 1,2,3...), not byte address.
+            inst <= rom[pc_addr[31:2]];
+        end
+
+        // Note: this register must be frozen on stall together with the PC.
+        // Because of the 1-cycle BRAM latency the PC is always one fetch AHEAD
+        // of the instruction sitting in ID. If this register kept loading
+        // rom[pc] during a stall, the stalled instruction in ID would be
+        // overwritten by the NEXT instruction (and that one would then be
+        // executed twice after the stall).
     end
 endmodule
 

@@ -34,7 +34,8 @@ module fpga_top (
         .alu_res(alu_res)
     );
 
-    // Route four internal PC bits to output pins for quick debug visibility.
+    // Route four spread-out ALU-result bits to output pins for quick debug
+    // visibility (and to keep the core from being optimized away in synthesis).
     assign debug_pc = {alu_res[31], alu_res[21], alu_res[11], alu_res[1]};
 
 endmodule

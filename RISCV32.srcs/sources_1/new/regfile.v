@@ -33,9 +33,10 @@ module regfile (
     input [31:0] wdata
 );
 
-    // Use the distributed RAM style of register file implementation
-    // which is more efficient for small register files like 32 registers.
-    // Can be read and written in the same cycle
+    // 32x32 register file with asynchronous (combinational) reads.
+    // Note: because of the synchronous reset loop below, synthesis will map
+    // this to flip-flops rather than distributed RAM, which is fine for a
+    // register file this small. Can be read and written in the same cycle.
     reg [31:0] regs[0:31];
 
     // Internal Forwarding (Write-First): 

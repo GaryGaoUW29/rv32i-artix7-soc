@@ -119,7 +119,7 @@ module tb_core ();
     // Simulation by reset the core, then let it run for a while before finishing
     initial begin
         rst_n = 1'b0;
-        #20;
+        #45;  // hold reset for at least 2 clock edges so every register (incl. the BRAM output regs) starts clean
         rst_n = 1'b1;
         #2500;
         $finish;

@@ -21,7 +21,7 @@
 
 
 module ex_stage (
-    // Inputs from IF stage
+    // Inputs from the ID/EX pipeline register
     input [31:0] ex_pc_i,     // used for ALU op1 when pc_sel is 1
     input [31:0] ex_rdata1_i, // used for ALU op1 and branch comp
     input [31:0] ex_rdata2_i, // used for ALU op2 and branch comp

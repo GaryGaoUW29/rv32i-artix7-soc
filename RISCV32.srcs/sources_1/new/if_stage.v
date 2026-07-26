@@ -41,8 +41,12 @@ module if_stage (
         .pc_out(if_pc_o)
     );
 
+    // The BRAM output register inside inst_mem is the de-facto IF/ID instruction
+    // register, so it must be frozen on stall together with the PC (see inst_mem).
     inst_mem u_inst_mem (
         .clk    (clk),
+        .rst_n  (rst_n),
+        .stall  (if_stall_i),
         .pc_addr(if_pc_o),
         .inst   (if_inst_o)
     );

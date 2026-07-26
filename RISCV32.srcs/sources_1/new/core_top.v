@@ -243,7 +243,7 @@ module core_top (
 
 
     ex_stage u_ex_stage (
-        // Inputs from IF stage
+        // Inputs from the ID/EX pipeline register
         .ex_pc_i    (ex_pc),      // pass to WB
         .ex_rdata1_i(ex_rdata1),  // used for ALU op1 and branch comp
         .ex_rdata2_i(ex_rdata2),  // used for ALU op2 and branch comp
@@ -306,6 +306,7 @@ module core_top (
     wire [31:0] wb_alu_res;
     wire [31:0] wb_rdata;
     wire [ 1:0] wb_wb_sel;
+    wire [ 2:0] wb_funct3;
 
     mem_stage u_mem_stage (
         .clk  (clk),
@@ -313,11 +314,10 @@ module core_top (
 
         .mem_wdata_i  (mem_wdata),
         .mem_mem_rw_i (mem_mem_rw),
-        .mem_reg_wen_i(mem_reg_wen),
-        .mem_wb_sel_i (mem_wb_sel),
         .mem_alu_res_i(mem_alu_res),
         .mem_funct3_i (mem_funct3),
 
+        // Raw BRAM read data (valid one cycle later, when the load is in WB)
         .mem_rdata_o(mem_rdata),
 
         // forwarding signals
@@ -337,18 +337,34 @@ module core_top (
         .mem_reg_wen_i(mem_reg_wen),
         .mem_rd_i     (mem_rd),
         .mem_wb_sel_i (mem_wb_sel),
+        .mem_funct3_i (mem_funct3),
 
         .wb_pc_o     (wb_pc),
         .wb_alu_res_o(wb_alu_res),
         .wb_rdata_o  (wb_rdata),
         .wb_reg_wen_o(wb_reg_wen),
         .wb_rd_o     (wb_rd),
-        .wb_wb_sel_o (wb_wb_sel)
+        .wb_wb_sel_o (wb_wb_sel),
+        .wb_funct3_o (wb_funct3)
     );
 
+    // Load data extraction (byte/half-word slice + sign/zero extension) is done
+    // HERE in the WB stage, not in MEM: the BRAM read data arrives one cycle
+    // after the address was presented, i.e. when the load itself is already in
+    // WB. So it must be sliced with the load's own registered controls
+    // (wb_funct3 / wb_alu_res), not with those of the instruction now in MEM.
+    wire        wb_is_load = wb_reg_wen && (wb_wb_sel == 2'b00);
+    wire [31:0] wb_rdata_filtered;
 
+    mem_load_control u_mem_load_control (
+        .alu_res       (wb_alu_res),
+        .rdata         (wb_rdata),
+        .is_load       (wb_is_load),
+        .funct3        (wb_funct3),
+        .rdata_filtered(wb_rdata_filtered)
+    );
 
-    assign wb_data = (wb_wb_sel == 2'b00) ? wb_rdata : 
+    assign wb_data = (wb_wb_sel == 2'b00) ? wb_rdata_filtered : 
                      (wb_wb_sel == 2'b01) ? wb_alu_res   :
                      (wb_wb_sel == 2'b10) ? (wb_pc + 4) : wb_alu_res;
 

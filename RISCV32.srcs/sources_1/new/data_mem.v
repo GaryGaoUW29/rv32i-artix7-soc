@@ -60,16 +60,17 @@ module data_mem (
         // so we have to divide addr by 4, same as addr[31:2].
 
         // Note 2:
-        // Don't need to worry about the read/write conflict in the same cycle 
-        // because the synthesizer will handle it by giving priority to the write operation, 
-        // So write-first
+        // With non-blocking assignments in the same always block, a same-cycle
+        // read of a written address returns the OLD value (read-first behavior).
+        // This never matters here: only one instruction occupies MEM per cycle,
+        // and a store followed by a load to the same address commits its write
+        // one full cycle before the load's read data is registered.
 
         // Note 3:
-        // No need to change anything for the load-use hazard in hazard detection unit, 
-        // because the load-use hazard will stall the pipeline for 1 cycle, 
-        // due to the hold-up time of the changes in address, the BRAM will read the NOP data in the next cycle
-        // even though the n+2 cycle BRAM will output the data from 0x00000000(NOP), 
-        // but the stall already set the write enable to 0, so the data in BRAM will not be overwritten
-        // "In Digital IC, it's fine if the bus carries trash, but it's a nightmare if the control logic has a glitch."
+        // Because rdata is registered (BRAM behavior), the read data belongs to
+        // the address presented in the PREVIOUS cycle, i.e. the load instruction
+        // that has meanwhile moved on to WB. That's why the load byte/half-word
+        // extraction is done in the WB stage with the load's own registered
+        // controls (see core_top / pipe_mem_wb).
     end
 endmodule
