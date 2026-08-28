@@ -141,6 +141,6 @@ module core_top (
     */
     assign wb_data = (wb_sel == 2'b00) ? rdata_filtered : 
                      (wb_sel == 2'b01) ? alu_res   :
-                     (wb_sel == 2'b10) ? (pc_wire + 4) : alu_res;  // 根据你具体的控制逻辑调整
+                     (wb_sel == 2'b10) ? (pc_wire + 4) : alu_res;
 
 endmodule
